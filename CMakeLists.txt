@@ -2,9 +2,13 @@
 # cmake file for building weather tool.
 #
 #
-# Usage:
+# Generate makefile:
 # cd ~/b/weatherb
-# cmake -DCMAKE_TOOLCHAIN_FILE=~/src/xtree/ctests/weather/macports.cmake ~/src/xtree/ctests/weather/
+# cmake -DCMAKE_TOOLCHAIN_FILE=~/src/xtree/weather/macports.cmake ~/src/xtree/weather/
+#
+# Generate Xcode project:
+# cd ~/b/weatherx
+# cmake -G Xcode -DCMAKE_TOOLCHAIN_FILE=~/src/xtree/weather/macports.cmake ~/src/xtree/weather/
 
 cmake_minimum_required(VERSION 2.6)
 
