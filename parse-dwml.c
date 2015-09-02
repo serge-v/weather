@@ -3,9 +3,9 @@
  * Get forecast from NOAA for specified zip code.
  */
 
-#include "../common/net.h"
-#include "../common/xml.h"
-#include "../common/struct.h"
+#include "common/net.h"
+#include "common/xml.h"
+#include "common/struct.h"
 #include "version.h"
 #include <err.h>
 #include <stdbool.h>
