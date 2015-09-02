@@ -21,6 +21,7 @@ function build() {
 	echo == executing build on host: $HOSTNAME ==
 	cd ~/src/xtree/weather
 	git pull
+	git submodule update
 	cmake .
 	make clean
 	make
@@ -32,10 +33,4 @@ function build() {
 	crontab -l | grep weather
 	echo
 	echo Project was build on $HOSTNAME. For install run script with -l parameter.
-}
-
-function clone_ctests() {
-	host=$1
-	ssh -t $host "mkdir -p ~/src/xtree"
-	ssh -t $host "cd ~/src/xtree; git clone https://github.com/serge-v/weather"
 }

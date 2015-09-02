@@ -17,13 +17,14 @@ elif [ x$1 == "x-t" ]; then
 	ssh -t $host "$callcmd test"
 elif [ x$1 == "x-b" ]; then
 	ssh -t $host "$callcmd build"
-elif [ x$1 == "x-u" ]; then
+elif [ x$1 == "x-n" ]; then
 	ssh -t $host "mkdir -p ~/src/xtree"
 	ssh -t $host "cd ~/src/xtree; git clone https://github.com/serge-v/weather"
+	ssh -t $host "cd ~/src/xtree/weather; git submodule update --init"
 else
 	echo usage: deploy.h [-bitl]
+	echo '    ' -n       clone
 	echo '    ' -i       info
-	echo '    ' -u       clone
 	echo '    ' -b       build
 	echo '    ' -l       install
 	echo '    ' -t       test
