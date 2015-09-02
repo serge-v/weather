@@ -22,17 +22,17 @@ include_directories(${CURL_INCLUDE_DIR})
 add_executable(
 	weather
 	parse-dwml.c
-	../common/net.c ../common/net.h
-	../common/xml.c ../common/xml.h
-	../common/struct.c ../common/struct.h
+	common/net.c common/net.h
+	common/xml.c common/xml.h
+	common/struct.c common/struct.h
 	version.c version.h
 )
 
 add_custom_command(
 	OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/version.c" "${CMAKE_CURRENT_SOURCE_DIR}/version.h"
-	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../common/genversion.sh
+	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/common/genversion.sh
 	DEPENDS
-	${CMAKE_CURRENT_SOURCE_DIR}/../common/genversion.sh CMakeLists.txt
+	${CMAKE_CURRENT_SOURCE_DIR}/common/genversion.sh CMakeLists.txt
 	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 	COMMENT "Generating version."
 )
