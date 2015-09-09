@@ -494,7 +494,7 @@ format_text_table(struct buf *buf, const struct dwml *dwml, enum legend_position
 
 	localtime_r(&dwml->base_time, &tm);
 	n = strftime(timestr, 30, "%Y-%m-%d %H", &tm);
-	
+
 	if (legend_pos == LEGEND_TOP)
 		format_legend(buf, timestr);
 
