@@ -1,6 +1,6 @@
 function install() {
 	echo == executing install on host: $HOSTNAME ==
-	sudo cp ~/src/xtree/weather/weather /usr/local/bin/
+	sudo cp ~/src/xtree/weather/build/weather /usr/local/bin/
 	/usr/local/bin/weather -v
 }
 
@@ -22,7 +22,10 @@ function build() {
 	cd ~/src/xtree/weather
 	git pull
 	git submodule update
-	cmake .
+	[ -d build ] && rm -rf build
+	mkdir build
+	cd build
+	cmake ..
 	make clean
 	make
 	echo == new version ==
