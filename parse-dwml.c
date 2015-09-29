@@ -5,7 +5,6 @@
 
 #include "common/net.h"
 #include "common/xml.h"
-#include "common/struct.h"
 #include "version.h"
 #include <err.h>
 #include <stdbool.h>
@@ -565,7 +564,7 @@ format_text_table(struct buf *buf, const struct dwml *dwml, enum legend_position
 static const char header[] =
 	"<tr style=\"background-color: lightsteelblue;\">"
 	"<th>HR&nbsp;&nbsp;</th>"
-	"<th colspan=\"5\">AIR</th>"
+	"<th colspan=\"4\">AIR</th>"
 	"<th colspan=\"2\">WIND</th>"
 	"<th>SNOW</th>"
 	"<th>CONDITIONS</th>"
@@ -573,8 +572,7 @@ static const char header[] =
 	"<tr>"
 	"<th></th>"
 	"<th>TMP</th>"
-	"<th>MIN</th>"
-	"<th>MAX</th>"
+	"<th>MNX</th>"
 	"<th>HUM</th>"
 	"<th>CLD</th>"
 	"<th>SPD</th>"
@@ -631,10 +629,7 @@ format_html_table(struct buf *buf, const struct dwml *dwml)
 
 		if (r->temp_min.has_value)
 			buf_appendf(buf, "<td%s>%d</td>", style, r->temp_min.celcius);
-		else
-			buf_appendf(buf, "<td></td>");
-
-		if (r->temp_max.has_value)
+		else if (r->temp_max.has_value)
 			buf_appendf(buf, "<td%s>%d</td>", style, r->temp_max.celcius);
 		else
 			buf_appendf(buf, "<td></td>");
@@ -742,7 +737,11 @@ load_dwml(const char *file)
 static void
 fetch_forecast(const char *fname, const char *url)
 {
-	if (fetch_url(url, fname) != 0)
+	struct httpreq_opts opts = {
+		.resp_fname = fname
+	};
+
+	if (httpreq(url, NULL, &opts) != 0)
 		err(1, "cannot fetch forecast for zip %d", zip);
 }
 
