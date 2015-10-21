@@ -1,0 +1,14 @@
+Usage:
+  Console mode:  weatherui -dhvg
+  CGI mode:      QUERY_STRING='k1=v1&k2=v2&...' weatherui
+
+Console mode options:
+
+  -d         print debug info, sql statements, commands, etc
+  -v         print version
+  -h         print help
+  -g         print config
+
+QUERY_STRING parameters:
+
+	none at this time.
