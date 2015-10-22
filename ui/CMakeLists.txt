@@ -25,6 +25,7 @@ gen_version_c()
 set(
 	resources
 	main.html
+	confirm.html
 	synopsis.txt
 	usage.txt
 )
@@ -38,12 +39,14 @@ add_executable(
 	main.c
 	config.c config.h
 	main.html.c main.html.h
+	confirm.html.c confirm.html.h
 	synopsis.txt.c
 	usage.txt.c
 	common/struct.c
 	common/regexp.c
 	common/mysql.c
 	common/crypt.c
+	common/net.c
 	version.c version.h
 	${resources}
 	${generated}
@@ -55,4 +58,5 @@ target_link_libraries(
 	${mysql_LIBRARY}
 	${ssl_LIBRARY}
 	${crypto_LIBRARY}
+	curl
 )

@@ -2,3 +2,4 @@ version.c
 version.h
 ui/common
 *~.*
+log/

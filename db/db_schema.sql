@@ -3,9 +3,9 @@ create table `user` (
 	created timestamp not null default current_timestamp,
 	email varchar(250) not null,
 	zip varchar(5) not null,
-	schedule time not null default '6:00',
+	schedule varchar(250) not null default '6:00',
 	confirm_code varchar(50) null,
 	next_send timestamp null,
 	last_sent timestamp null,
 	unique key user_id(user_id, email)
-);
+) collate utf8_general_ci;

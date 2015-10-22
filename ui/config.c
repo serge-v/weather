@@ -26,6 +26,7 @@ dump_config(struct buf *buf)
 	buf_appendf(buf, "dbname = %s\n", cfg.dbname);
 	buf_appendf(buf, "dbuser = %s\n", cfg.dbuser);
 	buf_appendf(buf, "dbpassword = %s\n", cfg.dbpassword);
+	buf_appendf(buf, "smtp_password_file = %s\n", cfg.smtp_password_file);
 }
 
 int
@@ -36,10 +37,13 @@ init_config(int argc, char **argv)
 	int ch, n, line = 0;
 	bool show_config = false;
 
-	while ((ch = getopt(argc, argv, "dhvg")) != -1) {
+	while ((ch = getopt(argc, argv, "dhvgp:")) != -1) {
 		switch (ch) {
 		case 'd':
 			cfg.debug = true;
+			break;
+		case 'p':
+			cfg.post_data = strdup(optarg);
 			break;
 		case 'g':
 			show_config = true;
@@ -91,6 +95,8 @@ init_config(int argc, char **argv)
 			cfg.dbpassword = strdup(value);
 		} else if (strcmp("cache_dir", key) == 0) {
 			cfg.cache_dir = strdup(value);
+		} else if (strcmp("smtp_password_file", key) == 0) {
+			cfg.smtp_password_file = strdup(value);
 		}
 	}
 	

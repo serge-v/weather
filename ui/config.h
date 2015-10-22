@@ -7,6 +7,8 @@ struct config {
 	const char *dbname;
 	const char *dbuser;
 	const char *dbpassword;
+	const char *smtp_password_file;
+	const char *post_data; /* debug post data */
 
 	char *cache_dir;    /* base dir for next files */
 	char *config_fname; /* config file name */

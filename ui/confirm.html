@@ -1,0 +1,32 @@
+<html>
+<head>
+</head>
+<body>
+<h2>Weather forecast by email</h2>
+
+<h3>Confirm subscription</h3>
+
+<form method="POST">
+<input type="hidden" name="confirm" value="{code}" />
+<table>
+	<tr>
+		<td>Email:</td>
+		<td>{email}</td>
+	</tr>
+	<tr>
+		<td>Zip:</td>
+		<td><input type="text" name="zip" value="{zip}" />
+	</tr>
+	<tr>
+		<td>Send everyday at:</td>
+		<td><input type="text" name="time" value="{schedule}" /> AM New York Time.</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit"/>
+	</tr>
+</table>
+</form>
+
+</body>
+</html>
