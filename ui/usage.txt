@@ -1,5 +1,5 @@
 Usage:
-  Console mode:  weatherui -dhvg
+  Console mode:  weatherui -dhvgi
   CGI mode:      QUERY_STRING='k1=v1&k2=v2&...' weatherui
 
 Console mode options:
@@ -8,6 +8,7 @@ Console mode options:
   -v         print version
   -h         print help
   -g         print config
+  -i         print db info
 
 QUERY_STRING parameters:
 

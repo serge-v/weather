@@ -37,7 +37,7 @@ init_config(int argc, char **argv)
 	int ch, n, line = 0;
 	bool show_config = false;
 
-	while ((ch = getopt(argc, argv, "dhvgp:")) != -1) {
+	while ((ch = getopt(argc, argv, "dihvgp:")) != -1) {
 		switch (ch) {
 		case 'd':
 			cfg.debug = true;

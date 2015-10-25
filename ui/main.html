@@ -4,20 +4,103 @@
 <body>
 <h2>Weather forecast by email</h2>
 
+<h3>About</h3>
+It is a pain to open and read weather reports at websites every morning.<br><br>
+This website sends email to you with the weather forecast<br>
+every day at scheduled time for specified zip code.<br>
+Email is formatted to fit cell phone email program.
+
 <h3>Subscribe to forecast</h3>
 
 <form method="POST">
 <table>
 	<tr>
 		<td>Email:</td>
-		<td><input type="text" name="email" size="50" value="serge0x76+test@gmail.com" />
+		<td><input type="text" name="email" size="50" value="" /></td>
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="submit"/>
+		<td><input type="submit"/></td>
 	</tr>
 </table>
+(You will set forecast zipcode and time later.)
 </form>
+
+<br>
+<br>
+
+<h3>Forecast email example</h3>
+
+Legend:<br>
+TMP -- temperature<br>
+MNX -- min/max temperature for a day<br>
+HUM,CLD -- humidity, clouds<br>
+SPD,DIR -- wind speed, direction<br>
+
+<br><br>
+Subject: wx: weather for zip 10974
+<table border="0">
+<tr style="background-color: lightsteelblue;"><th>HR&nbsp;&nbsp;</th><th colspan="4">AIR</th><th colspan="2">WIND</th><th>SNOW</th><th>CONDITIONS</th></tr>
+<tr><th></th><th>TMP</th><th>MNX</th><th>HUM</th><th>CLD</th><th>SPD</th><th>DIR</th></tr>
+
+<tr><td colspan="12" style="border: lightsteelblue 1px solid;">2015-10-19 Mon</td></tr>
+<tr><td>06</td><td>-3</td><td></td><td>88</td><td>4</td><td>0</td><td>310</td><td></td><td> frost patchy</td></tr>
+<tr><td>08</td><td>-3</td><td style="border: solid 1px pink; border-bottom: none">9</td><td>85</td><td>9</td><td>0</td><td>340</td><td></td><td> frost patchy</td></tr>
+<tr><td>11</td><td>2</td><td></td><td>51</td><td>21</td><td>2</td><td>280</td><td></td><td></td></tr>
+<tr><td>14</td><td>8</td><td></td><td>40</td><td>15</td><td>3</td><td>260</td><td></td><td></td></tr>
+<tr><td>17</td><td>9</td><td></td><td>37</td><td>6</td><td>3</td><td>240</td><td></td><td></td></tr>
+<tr><td>20</td><td>5</td><td style="border: solid 1px pink; border-bottom: none">3</td><td>51</td><td>13</td><td>1</td><td>220</td><td></td><td></td></tr>
+<tr><td>23</td><td>5</td><td></td><td>55</td><td>37</td><td>1</td><td>240</td><td></td><td></td></tr>
+
+<tr><td colspan="12" style="border: lightsteelblue 1px solid;">2015-10-20 Tue</td></tr>
+<tr><td>02</td><td>3</td><td></td><td>65</td><td>36</td><td>1</td><td>240</td><td></td><td></td></tr>
+<tr><td>05</td><td>3</td><td></td><td>70</td><td>50</td><td>1</td><td>240</td><td></td><td></td></tr>
+<tr><td>08</td><td>4</td><td style="border: solid 1px pink; border-bottom: none">18</td><td>76</td><td>61</td><td>1</td><td>260</td><td></td><td></td></tr>
+<tr><td>11</td><td>12</td><td></td><td>48</td><td>57</td><td>4</td><td>260</td><td></td><td></td></tr>
+<tr><td>14</td><td>17</td><td></td><td>38</td><td>56</td><td>5</td><td>250</td><td></td><td></td></tr>
+<tr><td>17</td><td>18</td><td></td><td>39</td><td>55</td><td>4</td><td>260</td><td></td><td></td></tr>
+<tr><td>20</td><td>14</td><td style="border: solid 1px pink; border-bottom: none">7</td><td>55</td><td>67</td><td>2</td><td>260</td><td></td><td></td></tr>
+<tr><td>23</td><td>12</td><td></td><td>69</td><td>64</td><td>1</td><td>280</td><td></td><td></td></tr>
+
+<tr><td colspan="12" style="border: lightsteelblue 1px solid;">2015-10-21 Wed</td></tr>
+<tr><td>02</td><td>11</td><td></td><td>74</td><td>60</td><td>0</td><td>310</td><td></td><td></td></tr>
+<tr><td>05</td><td>10</td><td></td><td>83</td><td>54</td><td>0</td><td>320</td><td></td><td></td></tr>
+<tr><td>08</td><td>11</td><td style="border: solid 1px pink; border-bottom: none">21</td><td>80</td><td>48</td><td>1</td><td>330</td><td></td><td></td></tr>
+<tr><td>11</td><td>15</td><td></td><td>60</td><td>42</td><td>2</td><td>260</td><td></td><td></td></tr>
+<tr><td>14</td><td>19</td><td></td><td>46</td><td>36</td><td>3</td><td>200</td><td></td><td></td></tr>
+<tr><td>17</td><td>20</td><td></td><td>47</td><td>44</td><td>2</td><td>190</td><td></td><td></td></tr>
+<tr><td>20</td><td>14</td><td style="border: solid 1px pink; border-bottom: none">7</td><td>69</td><td>52</td><td>1</td><td>190</td><td></td><td></td></tr>
+
+<tr><td colspan="12" style="border: lightsteelblue 1px solid;">2015-10-22 Thu</td></tr>
+<tr><td>02</td><td>10</td><td></td><td>86</td><td>60</td><td>0</td><td>190</td><td></td><td></td></tr>
+<tr><td>08</td><td>7</td><td style="border: solid 1px pink; border-bottom: none">18</td><td>100</td><td>66</td><td>1</td><td>200</td><td></td><td></td></tr>
+<tr><td>14</td><td>18</td><td></td><td>63</td><td>58</td><td>3</td><td>240</td><td></td><td></td></tr>
+<tr><td>20</td><td>13</td><td style="border: solid 1px pink; border-bottom: none">6</td><td>78</td><td>47</td><td>2</td><td>270</td><td></td><td></td></tr>
+
+<tr><td colspan="12" style="border: lightsteelblue 1px solid;">2015-10-23 Fri</td></tr>
+<tr><td>02</td><td>8</td><td></td><td>86</td><td>32</td><td>3</td><td>310</td><td></td><td></td></tr>
+<tr><td>08</td><td>3</td><td style="border: solid 1px pink; border-bottom: none">13</td><td>93</td><td>22</td><td>4</td><td>330</td><td></td><td></td></tr>
+<tr><td>14</td><td>13</td><td></td><td>53</td><td>23</td><td>4</td><td>330</td><td></td><td></td></tr>
+<tr><td>20</td><td>9</td><td style="border: solid 1px pink; border-bottom: none">3</td><td>66</td><td>16</td><td>3</td><td>350</td><td></td><td></td></tr>
+
+<tr><td colspan="12" style="border: lightsteelblue 1px solid;">2015-10-24 Sat</td></tr>
+<tr><td>02</td><td>3</td><td></td><td>82</td><td>15</td><td>2</td><td>360</td><td></td><td></td></tr>
+<tr><td>08</td><td>1</td><td style="border: solid 1px pink; border-bottom: none">14</td><td>96</td><td>28</td><td>1</td><td>360</td><td></td><td></td></tr>
+<tr><td>14</td><td>14</td><td></td><td>53</td><td>29</td><td>1</td><td>50</td><td></td><td></td></tr>
+<tr><td>20</td><td>11</td><td style="border: solid 1px pink; border-bottom: none">5</td><td>71</td><td>48</td><td>1</td><td>170</td><td></td><td></td></tr>
+
+<tr><td colspan="12" style="border: lightsteelblue 1px solid;">2015-10-25 Sun</td></tr>
+<tr><td>02</td><td>7</td><td></td><td>86</td><td>51</td><td>1</td><td>200</td><td></td><td></td></tr>
+<tr><td>08</td><td>4</td><td style="border: solid 1px pink; border-bottom: none">16</td><td>100</td><td>68</td><td>1</td><td>220</td><td></td><td></td></tr>
+<tr><td>14</td><td>15</td><td></td><td>65</td><td>76</td><td>4</td><td>220</td><td></td><td></td></tr>
+<tr><td>20</td><td>11</td><td></td><td>80</td><td>61</td><td>3</td><td>240</td><td></td><td></td></tr>
+</table>
+
+<h3>Contact</h3>
+
+Please send improvement ideas and questions to <a href="mailto:serge0x76+wetreps@gmail.com">serge0x76+wetreps@gmail.com</a>
+<br><br><br>
+
 
 </body>
 </html>

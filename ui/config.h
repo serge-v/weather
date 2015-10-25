@@ -14,6 +14,7 @@ struct config {
 	char *config_fname; /* config file name */
 
 	bool debug;         /* debug output to console */
+	bool info;          /* print weather db info */
 };
 
 extern struct config cfg;

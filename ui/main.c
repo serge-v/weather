@@ -16,7 +16,7 @@
 struct params {
 	const char *email;
 	const char *zip;
-	const char *time;
+	const char *schedule;
 	const char *code;
 	const char *confirm_code;
 	bool email_sent;
@@ -38,7 +38,8 @@ static char base_url[1024];
 static void
 init_base_url()
 {
-	snprintf(base_url, 1024, "%s%s", getenv("HTTP_HOST"), getenv("SCRIPT_NAME"));
+	snprintf(base_url, 1024, "%s://%s%s",
+		 getenv("REQUEST_SCHEME"), getenv("HTTP_HOST"), getenv("SCRIPT_NAME"));
 }
 
 static void
@@ -68,7 +69,7 @@ parse_post_data(struct params *p)
 
 	ptr = strstr(query, "time=");
 	if (ptr != NULL)
-		p->time = ptr + 5;
+		p->schedule = ptr + 5;
 
 	ptr = strstr(query, "confirm=");
 	if (ptr != NULL)
@@ -79,6 +80,15 @@ parse_post_data(struct params *p)
 		*ptr = 0;
 		ptr++;
 	}
+
+	if (p->email != NULL && *p->email == 0)
+		buf_appendf(&ebuf, "email is empty.\n");
+
+	if (p->zip != NULL && *p->zip == 0)
+		buf_appendf(&ebuf, "zip is empty.\n");
+
+	if (p->schedule != NULL && *p->schedule == 0)
+		buf_appendf(&ebuf, "schedule is empty.\n");
 }
 
 static void
@@ -260,12 +270,10 @@ create_user(const char *email, const char *zip, struct buf *confirm_email)
 	}
 
 	buf_appendf(confirm_email,
-		    "<pre>\n"
-		    "If you didn't subscribe for weather report from Wetreps just ignore this email.\n\n"
-		    "To confirm subscription and set options go to link:\n"
-		    "<a href=\"http://localhost:8000/weatherui?code=%s\">http://localhost:8000/weatherui?code=%s</a>\n\n"
-		    "Regards,\nWetreps\n(Weather Report Robots).\n"
-		    "</pre>\n",
+		    "If you didn't subscribe for weather report from Wetreps just ignore this email.<br><br>"
+		    "To confirm subscription and set options go to link:<br>"
+		    "<a href=\"http://localhost:8000/weatherui?code=%s\">http://localhost:8000/weatherui?code=%s</a><br><br>"
+		    "Regards,<br>Wetreps<br>(Weather Report Robots).<br>\n\n",
 		    confirm_code, confirm_code);
 }
 
@@ -420,19 +428,20 @@ int main(int argc, char **argv, char **envp)
 	parse_request(&p);
 
 	if (ebuf.len > 0) {
-		printf("ERROR: %s\n", ebuf.s);
-		exit(1);
+		buf_appendf(&page, "<font color=\"red\">ERROR: %s</font> <a href=\"%s\">back</a>",
+			    ebuf.s, base_url);
+		goto flush;
 	}
 
 	if (p.confirm_code != NULL) {
 		struct user user;
 		mysql = db_open(cfg.dbhost, cfg.dbname, cfg.dbuser, cfg.dbpassword);
 		if (!get_user(p.confirm_code, &user)) {
-			buf_appendf(&page, "Invalid confirmation code.");
+			buf_appendf(&page, "Invalid confirmation code. <a href=\"%s\">back</a>", base_url);
 			goto flush;
 		}
-		confirm_user(p.confirm_code, p.zip, p.time);
-		buf_appendf(&page, "<pre>Subscription confirmed.</pre>");
+		confirm_user(p.confirm_code, p.zip, p.schedule);
+		buf_appendf(&page, "Subscription confirmed. <a href=\"%s\">back</a>", base_url);
 		goto flush;
 	}
 
@@ -440,7 +449,7 @@ int main(int argc, char **argv, char **envp)
 		struct user user;
 		mysql = db_open(cfg.dbhost, cfg.dbname, cfg.dbuser, cfg.dbpassword);
 		if (!get_user(p.code, &user)) {
-			buf_appendf(&page, "Invalid confirmation code.");
+			buf_appendf(&page, "Invalid confirmation code. <a href=\"%s\">back</a>", base_url);
 			goto flush;
 		}
 
@@ -454,11 +463,8 @@ int main(int argc, char **argv, char **envp)
 
 	if (p.email_sent) {
 		buf_appendf(&page,
-			"<pre>"
-			"Confirmation email sent to you.\n"
-			"Please open email with subject 'wetreps' in your mailbox and \n"
-			"go to enclosed link to confirm delivery options.\n"
-			"</pre>");
+			"Please open your email program and wait for a message from us.<br>"
+			"Click on link in email to confirm delivery options.");
 		goto flush;
 	}
 	
@@ -480,8 +486,8 @@ flush:
 	for (char **env = envp; *env != 0; env++) {
 		buf_appendf(&page, "%s\n", *env);
 	}
-	buf_appendf(&page, "</pre>\n");
 */
+	buf_appendf(&page, "</pre>\n");
 	printf("Content-type: text/html\r\n");
 	printf("Content-length: %zu\r\n\r\n", page.len);
 	puts(page.s);

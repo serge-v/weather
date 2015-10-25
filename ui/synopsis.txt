@@ -1,3 +1,3 @@
 Usage:
-  weatherui -dhvg
+  weatherui -dhvgi
   QUERY_STRING='k1=v1&k2=v2' weatherui
