@@ -2,7 +2,7 @@ SRCDIR=$HOME/src/xtree/weather
 BDIR=$HOME/b/weather
 OS=$(uname)
 
-if [[ $OS == 'Darwin' ]] ; then
+if [ "_$OS" == "_Darwin" ] ; then
 	rm -rf ${BDIR}x
 	mkdir -p ${BDIR}x
 	cd ${BDIR}x
