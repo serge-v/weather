@@ -1,5 +1,5 @@
-all:
+$(MAKECMDGOALS):
 	make -C ~/b/weatherb $(MAKECMDGOALS)
 
-clean:
-	make -C ~/b/weatherb clean
+all:
+	make -C ~/b/cogs-uib/

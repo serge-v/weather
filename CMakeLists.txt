@@ -12,16 +12,16 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 find_package(CURL REQUIRED)
 find_package(LibXml2 REQUIRED)
 
-include(../common/macros.cmake)
+include(../../../w/common/macros.cmake)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${LIBXML2_INCLUDE_DIR})
 include_directories(${CURL_INCLUDE_DIR})
-include_directories(..)
+include_directories(../../../w)
 
 gen_version_c()
 
-add_subdirectory(../common "${CMAKE_BINARY_DIR}/common")
+add_subdirectory(../../../w/common "${CMAKE_BINARY_DIR}/common")
 
 add_executable(
 	weather
@@ -35,3 +35,5 @@ target_link_libraries(
 	${CURL_LIBRARY}
 	svc
 )
+
+install(TARGETS weather RUNTIME DESTINATION bin)
