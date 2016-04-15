@@ -851,8 +851,11 @@ int main(int argc, char **argv)
 
 	if (mail_recipients == NULL)
 		puts(out.s);
-	else
+	else {
+		buf_appendf(&out, "\n\nweather %s(%s) at host: %s, user: %s, app\n",
+			    app_version, app_date, getenv("HOST"), getenv("USER"));
 		send_email_to_me(out.s);
+	}
 
 	buf_clean(&out);
 	curl_global_cleanup();

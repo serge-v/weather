@@ -29,6 +29,8 @@ add_executable(
 	${CMAKE_CURRENT_BINARY_DIR}/version.c
 )
 
+add_dependencies(weather mkresource)
+
 target_link_libraries(
 	weather
 	${LIBXML2_LIBRARIES}
