@@ -762,7 +762,8 @@ send_email_to_me(const char *body)
 		.to = "serge0x76+weather@gmail.com",
 		.from = "serge0x76@gmail.com",
 		.subject = subject,
-		.body = body
+		.body = body,
+		.content_type = "text/html"
 	};
 
 	char fname[PATH_MAX];
@@ -852,7 +853,7 @@ int main(int argc, char **argv)
 	if (mail_recipients == NULL)
 		puts(out.s);
 	else {
-		buf_appendf(&out, "\n\nweather %s(%s) at host: %s, user: %s, app\n",
+		buf_appendf(&out, "<br>\n<br>\nweather %s(%s) at host: %s, user: %s\n",
 			    app_version, app_date, getenv("HOST"), getenv("USER"));
 		send_email_to_me(out.s);
 	}
